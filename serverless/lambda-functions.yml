@@ -1,1 +1,7 @@
-# TODO
+createEmployee:
+  handler: build/handlers/createEmployee.handler
+  events:
+    - http:
+        path: employees
+        method: post
+        cors: true
