@@ -19,7 +19,7 @@ export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayPr
             ...body,
             id: uuidv4(),
         }
-        const putItemCommand: PutCommand = new PutCommand({ TableName: 'employees', Item: employee });
+        const putItemCommand: PutCommand = new PutCommand({ TableName: 'dev-employee-be-employees', Item: employee });
 
         await ddbDocClient.send(putItemCommand);
 
