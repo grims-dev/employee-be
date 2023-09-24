@@ -4,7 +4,8 @@
   "description": "Repository for the back end of a sample employee dashboard",
   "main": "",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest",
+    "test:coverage": "npm run test -- --coverage --silent"
   },
   "repository": {
     "type": "git",
@@ -17,6 +18,7 @@
   },
   "homepage": "https://github.com/grims-dev/employee-be#readme",
   "devDependencies": {
+    "jest": "^29.7.0",
     "serverless": "^3.35.2",
     "typescript": "^5.2.2"
   },
