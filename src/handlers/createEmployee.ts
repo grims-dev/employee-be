@@ -1,10 +1,11 @@
 import { APIGatewayProxyEvent, APIGatewayProxyResult } from 'aws-lambda';
-import { AttributeValue, DynamoDBClient, PutItemCommand } from '@aws-sdk/client-dynamodb';
+import { AttributeValue, DynamoDBClient } from '@aws-sdk/client-dynamodb';
+import { DynamoDBDocumentClient, PutCommand } from '@aws-sdk/lib-dynamodb';
 import { v4 as uuidv4 } from 'uuid';
-import { Employee } from '../utils/types';
 import { createResponse } from '../utils/createResponse';
 
 const dynamoDbClient = new DynamoDBClient();
+const ddbDocClient = DynamoDBDocumentClient.from(dynamoDbClient);
 
 export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
     console.log('event ::', JSON.stringify(event, null, 2));
@@ -18,9 +19,9 @@ export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayPr
             ...body,
             id: uuidv4(),
         }
-        const putItemCommand: PutItemCommand = new PutItemCommand({ TableName: 'employees', Item: employee });
+        const putItemCommand: PutCommand = new PutCommand({ TableName: 'employees', Item: employee });
 
-        await dynamoDbClient.send(putItemCommand);
+        await ddbDocClient.send(putItemCommand);
 
         return createResponse(201, employee);
     } catch (error) {
