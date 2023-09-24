@@ -1,0 +1,17 @@
+service: ${file(package.json):name}
+provider:
+    name: aws
+    runtime: nodejs18.x
+    profile: ${env:AWS_PROFILE, 'default'}
+    region: ${env:AWS_REGION, 'eu-west-2'}
+    stage: ${env:STAGE, 'dev'}
+    stackTags:
+        Name: ${self:service}-${self:provider.stage}
+        Owner: grims-dev
+        ManagedBy: Serverless
+
+resources:
+    - ${file(./serverless/dynamodb-tables.yml)}
+
+functions:
+    - ${file(./serverless/lambda-functions.yml)}
