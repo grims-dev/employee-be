@@ -12,13 +12,15 @@ export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayPr
     console.log('event ::', JSON.stringify(event, null, 2));
 
     try {
+        // check ID path parameter
         const id = event.pathParameters?.id;
         if (!id) throw new Error('Missing ID path parameter from request');
 
+        // make sure employee exists
         await fetchEmployeeById(id, ddbDocClient);
 
+        // send delete command
         const deleteItemCommand: DeleteCommand = new DeleteCommand({ TableName: employeeTable, Key: { id } });
-
         await ddbDocClient.send(deleteItemCommand);
 
         return createResponse(204, { id });

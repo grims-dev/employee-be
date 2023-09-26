@@ -12,18 +12,21 @@ export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayPr
     console.log('event ::', JSON.stringify(event, null, 2));
 
     try {
+        // check body and parse object
         if (!event.body) throw new Error('Missing event body');
-
         const body = JSON.parse(event.body);
 
+        // generate employee record with id
         const employee: Record<string, AttributeValue> = {
             ...body,
             id: uuidv4(),
         }
-        const putItemCommand: PutCommand = new PutCommand({ TableName: employeeTable, Item: employee });
 
+        // save employee record to DynamoDB
+        const putItemCommand: PutCommand = new PutCommand({ TableName: employeeTable, Item: employee });
         await ddbDocClient.send(putItemCommand);
 
+        // return employee record
         return createResponse(201, employee);
     } catch (error) {
         console.error('An error occurred:', error);

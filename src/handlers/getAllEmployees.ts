@@ -11,8 +11,9 @@ export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayPr
     console.log('event ::', JSON.stringify(event, null, 2));
 
     try {
+        // send scan command
+        // TODO: add pagination
         const scanCommand: ScanCommand = new ScanCommand({ TableName: employeeTable });
-
         const items = await ddbDocClient.send(scanCommand);
 
         return createResponse(200, items);
