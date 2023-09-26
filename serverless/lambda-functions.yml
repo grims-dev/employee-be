@@ -1,5 +1,6 @@
 createEmployee:
   handler: build/handlers/createEmployee.handler
+  description: Create a new employee record
   events:
     - http:
         path: employees
@@ -8,6 +9,7 @@ createEmployee:
 
 deleteEmployee:
   handler: build/handlers/deleteEmployee.handler
+  description: Delete an employee record
   events:
     - http:
         path: employees/{id}
@@ -16,6 +18,7 @@ deleteEmployee:
 
 updateEmployee:
   handler: build/handlers/updateEmployee.handler
+  description: Update an employee record
   events:
     - http:
         path: employees/{id}
@@ -24,6 +27,7 @@ updateEmployee:
 
 getAllEmployees:
   handler: build/handlers/getAllEmployees.handler
+  description: Scan all employee records
   events:
     - http:
         path: employees
