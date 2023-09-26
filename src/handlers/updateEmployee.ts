@@ -3,6 +3,7 @@ import { AttributeValue, DynamoDBClient } from '@aws-sdk/client-dynamodb';
 import { DynamoDBDocumentClient, PutCommand } from '@aws-sdk/lib-dynamodb';
 import { createResponse } from '../utils/createResponse';
 import { employeeTable } from '../utils/constants';
+import { fetchEmployeeById } from '../utils/fetchEmployeeById';
 
 const dynamoDbClient = new DynamoDBClient();
 const ddbDocClient = DynamoDBDocumentClient.from(dynamoDbClient);
@@ -17,7 +18,10 @@ export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayPr
         if (!event.body) throw new Error('Missing event body');
         const body = JSON.parse(event.body);
 
+        const existingEmployee = await fetchEmployeeById(id, ddbDocClient);
+
         const employee: Record<string, AttributeValue> = {
+            ...existingEmployee,
             ...body,
             id,
         }

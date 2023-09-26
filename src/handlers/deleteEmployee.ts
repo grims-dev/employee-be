@@ -3,6 +3,7 @@ import { DynamoDBClient } from '@aws-sdk/client-dynamodb';
 import { DeleteCommand, DynamoDBDocumentClient } from '@aws-sdk/lib-dynamodb';
 import { createResponse } from '../utils/createResponse';
 import { employeeTable } from '../utils/constants';
+import { fetchEmployeeById } from '../utils/fetchEmployeeById';
 
 const dynamoDbClient = new DynamoDBClient();
 const ddbDocClient = DynamoDBDocumentClient.from(dynamoDbClient);
@@ -13,6 +14,8 @@ export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayPr
     try {
         const id = event.pathParameters?.id;
         if (!id) throw new Error('Missing ID path parameter from request');
+
+        await fetchEmployeeById(id, ddbDocClient);
 
         const deleteItemCommand: DeleteCommand = new DeleteCommand({ TableName: employeeTable, Key: { id } });
 
