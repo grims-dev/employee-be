@@ -3,6 +3,7 @@ import { AttributeValue, DynamoDBClient } from '@aws-sdk/client-dynamodb';
 import { DynamoDBDocumentClient, PutCommand } from '@aws-sdk/lib-dynamodb';
 import { v4 as uuidv4 } from 'uuid';
 import { createResponse } from '../utils/createResponse';
+import { employeeTable } from '../utils/constants';
 
 const dynamoDbClient = new DynamoDBClient();
 const ddbDocClient = DynamoDBDocumentClient.from(dynamoDbClient);
@@ -19,7 +20,7 @@ export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayPr
             ...body,
             id: uuidv4(),
         }
-        const putItemCommand: PutCommand = new PutCommand({ TableName: 'dev-employee-be-employees', Item: employee });
+        const putItemCommand: PutCommand = new PutCommand({ TableName: employeeTable, Item: employee });
 
         await ddbDocClient.send(putItemCommand);
 
