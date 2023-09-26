@@ -4,6 +4,18 @@ Repository for the back end of a sample employee dashboard.
 
 See [employee-fe](https://github.com/grims-dev/employee-fe) for the front end.
 
+## TODOs
+
+- Add pagination to `getAllEmployees` endpoint
+- Add authentication via tokens to endpoints
+- Add unit tests for handlers
+- Add unit tests for utility functions
+- Add error metrics to endpoints
+- Add field schema validation on incoming body data
+- Implement proper API documentation via Swagger
+- Add CI/CD pipeline for building, testing and deploying code
+- Add caching on GET requests
+
 ## Prerequisites
 
 - Node Version Manager (`nvm`) - Installation details at [github.com/nvm-sh/nvm](https://github.com/nvm-sh/nvm)
@@ -58,14 +70,3 @@ npm i
 - **Source**: `src/handlers/deleteEmployee.ts`
 - **Endpoint**: `/employees/${id}`
 - **Method**: `DELETE`
-
-## TODOs
-
-- Add pagination to `getAllEmployees` endpoint
-- Add authentication via tokens to endpoints
-- Add unit tests
-- Add error metrics to endpoints
-- Add field schema validation on incoming body data
-- Implement proper API documentation via Swagger
-- Add CI/CD pipeline for building, testing and deploying code
-- Add caching on GET requests
