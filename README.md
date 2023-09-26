@@ -7,14 +7,19 @@ See [employee-fe](https://github.com/grims-dev/employee-fe) for the front end.
 ## TODOs
 
 - Add pagination to `getAllEmployees` endpoint
-- Add authentication via tokens to endpoints
-- Add unit tests for handlers
-- Add unit tests for utility functions
-- Add error metrics to endpoints
 - Add field schema validation on incoming body data
+- Add authentication via tokens to endpoints
+- Add unit tests for handlers & utility functions
+- Add error metrics & alarms on endpoints for visibility on errors
 - Implement proper API documentation via Swagger
 - Add CI/CD pipeline for building, testing and deploying code
 - Add caching on GET requests
+- Add architecture diagram to README
+
+![Deployed Lambdas](./docs/lambda_dashboard.png)
+
+![Deployed DynamoDB table](./docs/dynamo_table.png)
+
 
 ## Prerequisites
 
