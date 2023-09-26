@@ -16,13 +16,12 @@ provider:
         role:
             statements:
                 - Effect: Allow
-            Action:
-                - 'dynamodb:PutItem'
-                - 'dynamodb:GetItem'
-                - 'dynamodb:DeleteItem'
-                - 'dynamodb:Scan'
-            Resource:
-                - { 'Fn::GetAtt': ['${self:provider.stage}-${self:service}-employees', 'Arn'] }
+                  Action:
+                    - 'dynamodb:PutItem'
+                    - 'dynamodb:DeleteItem'
+                    - 'dynamodb:Scan'
+                  Resource:
+                    - { 'Fn::GetAtt': ['EmployeesTable', 'Arn'] }
 
 resources:
     - ${file(./serverless/dynamodb-tables.yml)}
