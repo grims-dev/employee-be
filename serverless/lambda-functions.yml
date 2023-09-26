@@ -22,3 +22,10 @@ updateEmployee:
         method: put
         cors: true
 
+getAllEmployees:
+  handler: build/handlers/getAllEmployees.handler
+  events:
+    - http:
+        path: employees
+        method: get
+        cors: true
