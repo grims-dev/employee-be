@@ -19,7 +19,7 @@ provider:
                 - 'dynamodb:DeleteItem'
                 - 'dynamodb:Scan'
             Resource:
-                - { 'Fn::GetAtt': [${self:provider.stage}-${self:service}-employees, 'Arn'] }
+                - { 'Fn::GetAtt': ['${self:provider.stage}-${self:service}-employees', 'Arn'] }
 
 resources:
     - ${file(./serverless/dynamodb-tables.yml)}
