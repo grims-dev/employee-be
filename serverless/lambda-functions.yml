@@ -13,3 +13,12 @@ deleteEmployee:
         path: employees/{id}
         method: delete
         cors: true
+
+updateEmployee:
+  handler: build/handlers/updateEmployee.handler
+  events:
+    - http:
+        path: employees/{id}
+        method: put
+        cors: true
+
