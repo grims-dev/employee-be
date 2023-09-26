@@ -1,4 +1,7 @@
 service: ${file(package.json):name}
+
+configValidationMode: error
+
 provider:
     name: aws
     runtime: nodejs18.x
