@@ -9,6 +9,17 @@ provider:
         Name: ${self:service}-${self:provider.stage}
         Owner: grims-dev
         ManagedBy: Serverless
+    iam:
+        role:
+            statements:
+                - Effect: Allow
+            Action:
+                - 'dynamodb:PutItem'
+                - 'dynamodb:GetItem'
+                - 'dynamodb:DeleteItem'
+                - 'dynamodb:Scan'
+            Resource:
+                - { 'Fn::GetAtt': [${self:provider.stage}-${self:service}-employees, 'Arn'] }
 
 resources:
     - ${file(./serverless/dynamodb-tables.yml)}
