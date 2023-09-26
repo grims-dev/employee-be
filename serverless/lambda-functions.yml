@@ -5,3 +5,11 @@ createEmployee:
         path: employees
         method: post
         cors: true
+
+deleteEmployee:
+  handler: build/handlers/deleteEmployee.handler
+  events:
+    - http:
+        path: employees/{id}
+        method: delete
+        cors: true
