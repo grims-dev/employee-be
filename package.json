@@ -35,6 +35,8 @@
   "dependencies": {
     "@aws-sdk/client-dynamodb": "^3.418.0",
     "@aws-sdk/lib-dynamodb": "^3.418.0",
-    "uuid": "^9.0.1"
+    "uuid": "^9.0.1",
+    "zod": "^3.22.4",
+    "zod-validation-error": "^1.5.0"
   }
 }
