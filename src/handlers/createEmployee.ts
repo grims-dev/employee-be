@@ -4,6 +4,7 @@ import { DynamoDBDocumentClient, PutCommand } from '@aws-sdk/lib-dynamodb';
 import { v4 as uuidv4 } from 'uuid';
 import { createResponse } from '../utils/createResponse';
 import { employeeTable } from '../utils/constants';
+import { Employee, EmployeeSchema } from '../utils/schema';
 
 const dynamoDbClient = new DynamoDBClient();
 const ddbDocClient = DynamoDBDocumentClient.from(dynamoDbClient);
@@ -17,10 +18,13 @@ export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayPr
         const body = JSON.parse(event.body);
 
         // generate employee record with id
-        const employee: Record<string, AttributeValue> = {
+        const employee: Employee = {
             ...body,
             id: uuidv4(),
-        }
+        };
+
+        // validate employee against schema
+        EmployeeSchema.parse(employee);
 
         // save employee record to DynamoDB
         const putItemCommand: PutCommand = new PutCommand({ TableName: employeeTable, Item: employee });

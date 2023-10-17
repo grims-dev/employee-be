@@ -4,6 +4,7 @@ import { DynamoDBDocumentClient, PutCommand } from '@aws-sdk/lib-dynamodb';
 import { createResponse } from '../utils/createResponse';
 import { employeeTable } from '../utils/constants';
 import { fetchEmployeeById } from '../utils/fetchEmployeeById';
+import { Employee, EmployeeSchema } from '../utils/schema';
 
 const dynamoDbClient = new DynamoDBClient();
 const ddbDocClient = DynamoDBDocumentClient.from(dynamoDbClient);
@@ -22,11 +23,14 @@ export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayPr
 
         // generate employee record with existing employee
         const existingEmployee = await fetchEmployeeById(id, ddbDocClient);
-        const employee: Record<string, AttributeValue> = {
+        const employee: Employee = {
             ...existingEmployee,
             ...body,
             id,
-        }
+        };
+
+        // validate employee against schema
+        EmployeeSchema.parse(employee);
 
         // update employee record in DynamoDB
         const putItemCommand: PutCommand = new PutCommand({ TableName: employeeTable, Item: employee });
