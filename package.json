@@ -20,6 +20,8 @@
   },
   "homepage": "https://github.com/grims-dev/employee-be#readme",
   "devDependencies": {
+    "@anatine/zod-mock": "^3.13.2",
+    "@faker-js/faker": "^8.2.0",
     "@tsconfig/node18": "^18.2.2",
     "@types/aws-lambda": "^8.10.122",
     "@types/jest": "^29.5.5",
